@@ -521,9 +521,10 @@
     <ul>
       <li class="nav-dropdown">
         <button class="nav-dropdown-btn" id="projBtn" onclick="toggleDropdown()">
-          프로젝트 <span class="arrow">▼</span>
+          메뉴 <span class="arrow">▼</span>
         </button>
         <div class="nav-dropdown-menu" id="projMenu">
+          <a href="#hero" id="menuHome">메인페이지</a>
           <a href="#proj-shinhan">신한투자증권 AI 인턴</a>
           <a href="#proj-adhd">ADHD 일상 플래너</a>
           <a href="#proj-diabetes">당뇨 레시피 추천 ML</a>
@@ -534,7 +535,7 @@
 </nav>
 
 <!-- Hero -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-label">Portfolio</div>
     <h1>금융과 AI를<br><span>연결하는</span> 개발자</h1>
@@ -805,8 +806,16 @@
     }
   });
 
+  document.getElementById('menuHome').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('projBtn').classList.remove('open');
+    document.getElementById('projMenu').classList.remove('open');
+    document.getElementById('projects').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   var slideMap = { 'proj-shinhan': 0, 'proj-adhd': 1, 'proj-diabetes': 2 };
-  document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link) {
+  document.querySelectorAll('.nav-dropdown-menu a:not(#menuHome)').forEach(function(link) {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('projBtn').classList.remove('open');
