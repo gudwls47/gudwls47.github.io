@@ -331,26 +331,32 @@
         <div class="project-header">
           <div>
             <span class="project-type">인턴십</span>
-            <h3>LLM 기반 AI 챗봇 PoC 검증</h3>
-            <p class="project-subtitle">신한투자증권 AI솔루션부</p>
+            <h3>금융 문서 AsciiDoc 변환 및 LLM 성능 검증</h3>
+            <p class="project-subtitle">신한투자증권 AI솔루션부 · 2025.09</p>
           </div>
-          <span class="project-period">2024</span>
+          <span class="project-period">2025</span>
         </div>
         <p class="project-desc">
-          금융 현업 문서를 LLM이 처리하기 최적화된 구조로 변환하고, 동일 모델에 다양한 프롬프트를 적용하여 응답 품질을 체계적으로 비교·검증했습니다. 현업 담당자 관점에서 AI 서비스의 실용성과 한계를 직접 평가했습니다.
+          사내 금융 문서(ISA, 연금저축, 공통업무 매뉴얼 등)를 LLM이 정확히 인식하도록 AsciiDoc 형식으로 변환하고, PDF 대비 응답 품질 향상을 정량적으로 검증했습니다. GPT-5, Gemini 2.5 Flash, Gemini 2.5 Pro 세 모델을 동일 질문으로 비교해 할루시네이션 발생 패턴과 원인을 분석했습니다.
         </p>
         <ul class="project-achievements">
-          <li>업무 문서를 AsciiDoc 형식으로 구조화하여 LLM 처리 정확도 개선</li>
-          <li>AsciiDoc vs PDF 형식 간 LLM 응답 품질 비교 실험 수행</li>
-          <li>동일 모델 대상 프롬프트 변경에 따른 성능 차이 분석</li>
-          <li>현업 관점에서 AI 챗봇 응답의 적합성 및 할루시네이션 검토</li>
+          <li>ISA·연금저축·공통업무 매뉴얼 등 금융 문서 AsciiDoc 수기 변환 (Mermaid flowchart 포함)</li>
+          <li>PDF 직접 질문 시 LLM이 수수료·표 구조를 오인식하는 케이스를 발견하고 원인 분석</li>
+          <li>AsciiDoc 변환 후 동일 질문 재실험 → 인식 정확도 개선 효과 검증</li>
+          <li>Mathpix OCR + Pandoc 자동 변환 워크플로우 구축 (PDF → Markdown → AsciiDoc)</li>
+          <li>LlamaParser · Gemini · 무료 OCR 3가지 도구의 표 구조 복원율 비교 분석</li>
+          <li>GPT-5 vs Gemini 2.5 Flash vs Gemini 2.5 Pro 모델별 오류 유형 및 답변 품질 비교</li>
+          <li>AI PB서비스 출시 후 QA 관련 개선 회의 참여</li>
         </ul>
         <div class="tech-tags">
-          <span class="tech-tag">LLM</span>
+          <span class="tech-tag">GPT-5</span>
+          <span class="tech-tag">Gemini 2.5 Flash</span>
+          <span class="tech-tag">Gemini 2.5 Pro</span>
           <span class="tech-tag">AsciiDoc</span>
-          <span class="tech-tag">Prompt Engineering</span>
+          <span class="tech-tag">Pandoc</span>
+          <span class="tech-tag">Mathpix OCR</span>
+          <span class="tech-tag">LlamaParser</span>
           <span class="tech-tag">AI 품질 검증</span>
-          <span class="tech-tag">문서 구조화</span>
         </div>
       </div>
 
