@@ -50,6 +50,40 @@
     nav ul a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
     nav ul a:hover { color: var(--accent-dark); }
 
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 0.9rem;
+      font-family: inherit; padding: 0;
+      display: flex; align-items: center; gap: 4px;
+      transition: color 0.2s;
+    }
+    .nav-dropdown-btn:hover { color: var(--accent-dark); }
+    .nav-dropdown-btn .arrow {
+      font-size: 0.65rem; transition: transform 0.2s;
+    }
+    .nav-dropdown-btn.open .arrow { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute; top: calc(100% + 10px); right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      min-width: 220px;
+      overflow: hidden;
+      z-index: 200;
+    }
+    .nav-dropdown-menu.open { display: block; }
+    .nav-dropdown-menu a {
+      display: block; padding: 12px 16px;
+      text-decoration: none; color: var(--text);
+      font-size: 0.88rem; transition: background 0.15s;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: var(--tag-bg); color: var(--accent-dark); }
+
     .hero {
       min-height: 100vh;
       display: flex;
@@ -390,7 +424,16 @@
   <div class="nav-inner">
     <span class="logo">전형진</span>
     <ul>
-      <li><a href="#projects">프로젝트</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-btn" id="projBtn" onclick="toggleDropdown()">
+          프로젝트 <span class="arrow">▼</span>
+        </button>
+        <div class="nav-dropdown-menu" id="projMenu">
+          <a href="#proj-shinhan">신한투자증권 AI 인턴</a>
+          <a href="#proj-adhd">ADHD 일상 플래너</a>
+          <a href="#proj-diabetes">당뇨 레시피 추천 ML</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
@@ -421,7 +464,7 @@
     <div class="projects-grid">
 
       <!-- 신한투자증권 인턴 -->
-      <div class="project-card">
+      <div class="project-card" id="proj-shinhan">
         <div class="project-header">
           <div>
             <span class="project-type">인턴십</span>
@@ -469,7 +512,7 @@
       </div>
 
       <!-- ADHD 루틴 앱 -->
-      <div class="project-card">
+      <div class="project-card" id="proj-adhd">
         <div class="project-header">
           <div>
             <span class="project-type">팀 프로젝트 4인 · 팀장 · Frontend</span>
@@ -531,7 +574,7 @@
       </div>
 
       <!-- 당뇨 레시피 추천 ML -->
-      <div class="project-card">
+      <div class="project-card" id="proj-diabetes">
         <div class="project-header">
           <div>
             <span class="project-type">팀 프로젝트 · 2인</span>
@@ -605,5 +648,28 @@
   <p>전형진 · <a href="mailto:gudwls47@naver.com">gudwls47@naver.com</a> · <a href="https://github.com/gudwls47" target="_blank">github.com/gudwls47</a></p>
 </footer>
 
+<script>
+  function toggleDropdown() {
+    const btn = document.getElementById('projBtn');
+    const menu = document.getElementById('projMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.nav-dropdown');
+    if (!dropdown.contains(e.target)) {
+      document.getElementById('projBtn').classList.remove('open');
+      document.getElementById('projMenu').classList.remove('open');
+    }
+  });
+
+  document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('projBtn').classList.remove('open');
+      document.getElementById('projMenu').classList.remove('open');
+    });
+  });
+</script>
 </body>
 </html>
