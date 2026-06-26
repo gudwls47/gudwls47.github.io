@@ -195,7 +195,10 @@
       margin-bottom: 3rem;
     }
 
-    .slider-container { overflow: hidden; }
+    .slider-container {
+      width: 100%;
+      overflow: hidden;
+    }
 
     .slider-track {
       display: flex;
@@ -203,8 +206,10 @@
     }
 
     .project-card {
-      min-width: 100%;
-      flex-shrink: 0;
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
