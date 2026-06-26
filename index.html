@@ -444,47 +444,47 @@
         <div class="project-header">
           <div>
             <span class="project-type">팀 프로젝트 · 2인</span>
-            <h3>당뇨 환자 친화 레시피 추천 시스템</h3>
-            <p class="project-subtitle">CGM 데이터 기반 혈당 상승 최소화 레시피 추천 머신러닝</p>
+            <h3>당뇨 환자를 위한 냉장고 레시피 추천 시스템</h3>
+            <p class="project-subtitle">CGM 실측 데이터 기반 혈당 상승 예측 + 레시피 추천 ML</p>
           </div>
           <span class="project-period">2026</span>
         </div>
         <p class="project-desc">
-          당뇨 환자의 식후 혈당 상승을 최소화하는 레시피를 자동 추천하는 시스템을 2인 팀으로 개발했습니다. PhysioNet CGMacros 데이터셋과 Food.com 데이터셋을 활용하여 레시피별 당뇨 적합성 점수를 산출하고 맞춤 추천을 제공합니다.
+          냉장고 재료(한국어/영어)를 입력하면 Food.com 레시피 231,637개에서 만들 수 있는 레시피를 추천하고, 45명의 실제 CGM 데이터로 학습한 Gradient Boosting 모델이 예상 혈당 상승값과 당뇨 적합 여부를 판정합니다.
         </p>
         <ul class="project-achievements">
-          <li>PhysioNet CGMacros + Food.com 데이터셋 수집 및 전처리</li>
-          <li>ADA 식이 가이드라인 기반 당뇨 적합성 점수(0~100) 알고리즘 설계</li>
-          <li>당류·탄수화물·단백질·칼로리를 피처로 레시피 스코어링 모델 구현</li>
-          <li>TF-IDF 기반 재료 유사도 계산으로 레시피 검색 기능 구현</li>
+          <li>PhysioNet CGMacros 45명 실측 데이터(식사 1,524건) + Food.com 231,637개 레시피 전처리</li>
+          <li>식전 혈당·탄수화물·단백질·지방·식이섬유를 피처로 Gradient Boosting BG rise 예측 모델 구현</li>
+          <li>알코올·칵테일 레시피 자동 필터링 및 600 kcal 1인분 기준 영양성분 정규화</li>
+          <li>한국어 재료명 영어 변환 기능 구현으로 냉장고 재료 직접 입력 지원</li>
+          <li>대한당뇨병학회 기준(식후 2시간 혈당 180 mg/dL 미만)으로 당뇨 적합성 자동 판정</li>
         </ul>
 
         <!-- 실행 예시 -->
         <div class="code-block">
-          <pre><span class="code-comment"># 레시피 당뇨 적합성 평가</span>
-<span class="code-key">레시피</span>       그릭 요거트 & 베리 샐러드
-<span class="code-key">sugar_pct</span>    <span class="code-num">4.2</span> %DV   <span class="code-key">carbs_pct</span>    <span class="code-num">12.8</span> %DV
-<span class="code-key">protein_pct</span>  <span class="code-num">18.5</span> %DV  <span class="code-key">calories</span>     <span class="code-num">285</span> kcal
+          <pre><span class="code-comment"># 입력: 감자, 양파, 당근 / 식전 혈당 110 mg/dL / lunch</span>
 
-<span class="code-comment">─────────────────────────────────────</span>
-<span class="code-label">▶  당뇨 적합성 결과</span>
-<span class="code-comment">─────────────────────────────────────</span>
-<span class="code-key">당 점수</span>      <span class="code-ok">40.0</span>  <span class="code-comment">(4.2%DV ≤ 5%DV 기준 충족)</span>
-<span class="code-key">탄수화물</span>     <span class="code-ok">40.0</span>  <span class="code-comment">(12.8%DV ≤ 15%DV 기준 충족)</span>
-<span class="code-key">단백질 보너스</span> <span class="code-ok">+10</span>  <span class="code-comment">(18.5%DV ≥ 10%DV)</span>
-<span class="code-key">칼로리 보너스</span> <span class="code-ok">+10</span>  <span class="code-comment">(285kcal ≤ 400kcal)</span>
+<span class="code-label">추천 레시피</span>
+<span class="code-key">레시피명</span>       Potato Carrot Soup
+<span class="code-key">재료 보유율</span>    <span class="code-num">60</span>%
+<span class="code-key">추가 필요 재료</span> celery, chicken broth
+<span class="code-key">칼로리</span>         <span class="code-num">320</span> kcal
+<span class="code-key">탄수화물</span>       <span class="code-num">21.3</span>g  |  단백질: <span class="code-num">8.5</span>g  |  지방: <span class="code-num">6.2</span>g
 
-<span class="code-key">당뇨 적합성 점수</span>  <span class="code-ok">100.0 / 100</span>
-<span class="code-key">판정</span>             <span class="code-ok">✅  매우 적합</span></pre>
+<span class="code-comment">─────────────────────────────────────────────</span>
+<span class="code-key">혈당 상승 예측</span> <span class="code-ok">+35 mg/dL</span>  →  식후 혈당 <span class="code-ok">145 mg/dL</span>
+<span class="code-key">당뇨 적합성</span>    <span class="code-ok">[적합]</span>  식후 혈당 145 mg/dL <span class="code-comment">(180 미만 — 목표 달성)</span>
+<span class="code-comment">─────────────────────────────────────────────</span>
+<span class="code-comment">※ CGMacros 45명 실측 기반 — 개인차 있으므로 참고용</span></pre>
         </div>
 
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
+          <span class="tech-tag">Gradient Boosting</span>
           <span class="tech-tag">scikit-learn</span>
           <span class="tech-tag">PhysioNet CGMacros</span>
           <span class="tech-tag">Food.com</span>
-          <span class="tech-tag">TF-IDF</span>
-          <span class="tech-tag">머신러닝</span>
+          <span class="tech-tag">CLI</span>
         </div>
       </div>
 
