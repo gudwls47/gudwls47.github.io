@@ -8,15 +8,15 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #F9F5F0;
+      --bg: #FDFCF0;
       --bg-card: #FFFFFF;
-      --bg-section: #F0EAE2;
-      --accent: #C4956A;
-      --accent-dark: #8B6F47;
+      --bg-section: #F8F5E0;
+      --accent: #C9A84C;
+      --accent-dark: #8B7020;
       --text: #2D2D2D;
-      --text-muted: #7A7069;
-      --border: #E8E0D5;
-      --tag-bg: #F0EAE2;
+      --text-muted: #7A7460;
+      --border: #EAE5C0;
+      --tag-bg: #F5F2DC;
     }
 
     body {
@@ -26,11 +26,10 @@
       line-height: 1.7;
     }
 
-    /* Nav */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(249, 245, 240, 0.92);
+      background: rgba(253, 252, 240, 0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -47,12 +46,10 @@
     }
 
     .logo { font-weight: 700; font-size: 1.05rem; color: var(--accent-dark); }
-
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
     nav ul a:hover { color: var(--accent-dark); }
 
-    /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -117,9 +114,7 @@
 
     .hero-cta:hover { background: var(--accent); transform: translateY(-2px); }
 
-    /* Sections */
     section { padding: 80px 2rem; }
-
     .section-inner { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
@@ -137,7 +132,6 @@
       margin-bottom: 3rem;
     }
 
-    /* Project Cards */
     .projects-grid { display: grid; gap: 1.5rem; }
 
     .project-card {
@@ -150,7 +144,7 @@
 
     .project-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
     }
 
     .project-header {
@@ -177,7 +171,6 @@
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
       margin-bottom: 0.5rem;
-      letter-spacing: 0.02em;
     }
 
     .project-card h3 {
@@ -186,10 +179,7 @@
       margin-bottom: 0.2rem;
     }
 
-    .project-subtitle {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-    }
+    .project-subtitle { color: var(--text-muted); font-size: 0.88rem; }
 
     .project-desc {
       color: var(--text-muted);
@@ -218,7 +208,7 @@
       font-weight: 600;
     }
 
-    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
 
     .tech-tag {
       background: var(--tag-bg);
@@ -230,46 +220,83 @@
       font-weight: 500;
     }
 
-    /* Background */
-    .bg-section { background: var(--bg-section); }
-
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 2rem;
-      align-items: start;
-      padding: 1.5rem 0;
+    /* UI Flow */
+    .ui-flow {
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
     }
 
-    .timeline-date { font-size: 0.83rem; color: var(--text-muted); padding-top: 0.15rem; }
-
-    .timeline-content h4 { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; }
-    .timeline-content p { font-size: 0.88rem; color: var(--text-muted); }
-
-    hr.divider { border: none; border-top: 1px solid var(--border); }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2rem;
+    .ui-flow-inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: max-content;
     }
 
-    .skill-group h4 {
+    .ui-screen {
+      background: var(--tag-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .ui-screen-icon {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .ui-screen-name {
       font-size: 0.78rem;
       font-weight: 700;
-      color: var(--accent-dark);
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 0.15rem;
     }
 
-    .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .skill-group ul li { font-size: 0.9rem; color: var(--text-muted); }
+    .ui-screen-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
 
-    /* Footer */
+    .ui-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      padding: 0 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .ui-screen.highlight {
+      border-color: var(--accent);
+      background: #FFF8E0;
+    }
+
+    /* Code block */
+    .code-block {
+      background: #1E1E1E;
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: 'Fira Code', 'Consolas', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #D4D4D4;
+    }
+
+    .code-comment { color: #6A9955; }
+    .code-key { color: #9CDCFE; }
+    .code-val { color: #CE9178; }
+    .code-num { color: #B5CEA8; }
+    .code-ok { color: #4EC9B0; }
+    .code-warn { color: #DCDCAA; }
+    .code-label { color: #C586C0; }
+
     footer {
       padding: 3rem 2rem;
       border-top: 1px solid var(--border);
@@ -280,9 +307,7 @@
     footer a { color: var(--accent-dark); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* Responsive */
     @media (max-width: 640px) {
-      .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .project-header { flex-direction: column; }
       nav ul { gap: 1rem; }
     }
@@ -295,8 +320,6 @@
     <span class="logo">전형진</span>
     <ul>
       <li><a href="#projects">프로젝트</a></li>
-      <li><a href="#background">경력</a></li>
-      <li><a href="#skills">스킬</a></li>
     </ul>
   </div>
 </nav>
@@ -312,7 +335,7 @@
       <span class="hero-tag">LLM 평가</span>
       <span class="hero-tag">프롬프트 엔지니어링</span>
       <span class="hero-tag">금융 도메인</span>
-      <span class="hero-tag">Python · Next.js</span>
+      <span class="hero-tag">Python · Android</span>
     </div>
     <a href="#projects" class="hero-cta">프로젝트 보기 →</a>
   </div>
@@ -341,12 +364,12 @@
         </p>
         <ul class="project-achievements">
           <li>ISA·연금저축·공통업무 매뉴얼 등 금융 문서 AsciiDoc 수기 변환 (Mermaid flowchart 포함)</li>
-          <li>PDF 직접 질문 시 LLM이 수수료·표 구조를 오인식하는 케이스를 발견하고 원인 분석</li>
+          <li>PDF 직접 질문 시 LLM이 수수료·표 구조를 오인식하는 케이스 발견 및 원인 분석</li>
           <li>AsciiDoc 변환 후 동일 질문 재실험 → 인식 정확도 개선 효과 검증</li>
           <li>Mathpix OCR + Pandoc 자동 변환 워크플로우 구축 (PDF → Markdown → AsciiDoc)</li>
           <li>LlamaParser · Gemini · 무료 OCR 3가지 도구의 표 구조 복원율 비교 분석</li>
           <li>GPT-5 vs Gemini 2.5 Flash vs Gemini 2.5 Pro 모델별 오류 유형 및 답변 품질 비교</li>
-          <li>AI PB서비스 출시 후 QA 관련 개선 회의 참여</li>
+          <li>AI PB서비스 출시 후 QA 개선 회의 참여</li>
         </ul>
         <div class="tech-tags">
           <span class="tech-tag">GPT-5</span>
@@ -379,6 +402,42 @@
           <li>Figma로 앱 전체 UI/UX 디자인 설계</li>
           <li>팀장으로서 일정 관리, 발표 자료(PPT) 제작 주도</li>
         </ul>
+
+        <!-- UI Flow -->
+        <div class="ui-flow">
+          <div class="ui-flow-inner">
+            <div class="ui-screen">
+              <div class="ui-screen-icon">🔐</div>
+              <div class="ui-screen-name">로그인</div>
+              <div class="ui-screen-desc">Google<br>소셜 로그인</div>
+            </div>
+            <div class="ui-arrow">→</div>
+            <div class="ui-screen">
+              <div class="ui-screen-icon">✅</div>
+              <div class="ui-screen-name">홈 (TODO)</div>
+              <div class="ui-screen-desc">오늘의 할 일<br>체크리스트</div>
+            </div>
+            <div class="ui-arrow">→</div>
+            <div class="ui-screen highlight">
+              <div class="ui-screen-icon">🤖</div>
+              <div class="ui-screen-name">AI 루틴 생성</div>
+              <div class="ui-screen-desc">Gemini API<br>맞춤 루틴 추천</div>
+            </div>
+            <div class="ui-arrow">→</div>
+            <div class="ui-screen">
+              <div class="ui-screen-icon">📅</div>
+              <div class="ui-screen-name">루틴 관리</div>
+              <div class="ui-screen-desc">요일별 루틴<br>스케줄 설정</div>
+            </div>
+            <div class="ui-arrow">→</div>
+            <div class="ui-screen">
+              <div class="ui-screen-icon">👤</div>
+              <div class="ui-screen-name">마이페이지</div>
+              <div class="ui-screen-desc">프로필 및<br>기록 관리</div>
+            </div>
+          </div>
+        </div>
+
         <div class="tech-tags">
           <span class="tech-tag">Gemini 2.5 Flash</span>
           <span class="tech-tag">Android</span>
@@ -406,6 +465,24 @@
           <li>환자 데이터 전처리 및 피처 엔지니어링 수행</li>
           <li>숭실대 IT 프로젝트 경진대회 최우수상 수상</li>
         </ul>
+
+        <!-- 실행 예시 -->
+        <div class="code-block">
+          <pre><span class="code-comment"># 입력 데이터 (환자 샘플)</span>
+<span class="code-key">나이</span>         <span class="code-num">52</span>세   <span class="code-key">BMI</span>          <span class="code-num">26.4</span>
+<span class="code-key">공복혈당</span>     <span class="code-num">118</span> mg/dL  <span class="code-key">당화혈색소</span>   <span class="code-num">6.8</span>%
+<span class="code-key">운동빈도</span>     주 <span class="code-num">2</span>회  <span class="code-key">식이섬유 섭취</span>  낮음
+<span class="code-key">고혈압 여부</span>  있음   <span class="code-key">가족력</span>       있음
+
+<span class="code-comment">─────────────────────────────────────</span>
+<span class="code-label">▶  예측 결과</span>
+<span class="code-comment">─────────────────────────────────────</span>
+<span class="code-key">식후 2시간 혈당</span>   <span class="code-warn">187 mg/dL</span>
+<span class="code-key">판정</span>              <span class="code-warn">⚠  주의 구간  (140 ~ 199 mg/dL)</span>
+<span class="code-key">모델 신뢰도</span>       <span class="code-ok">89.3%</span>
+<span class="code-key">사용 모델</span>         Gradient Boosting  (n_estimators=200)</pre>
+        </div>
+
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">Gradient Boosting</span>
@@ -415,89 +492,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- Background -->
-<section id="background" class="bg-section">
-  <div class="section-inner">
-    <div class="section-label">Background</div>
-    <h2 class="section-title">경력 및 학력</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <span class="timeline-date">2024 – 현재</span>
-        <div class="timeline-content">
-          <h4>숭실대학교</h4>
-          <p>IT 관련 학과 재학 · IT 프로젝트 경진대회 최우수상</p>
-        </div>
-      </div>
-      <hr class="divider">
-      <div class="timeline-item">
-        <span class="timeline-date">2024</span>
-        <div class="timeline-content">
-          <h4>신한투자증권 AI솔루션부 인턴</h4>
-          <p>LLM 기반 AI 챗봇 PoC · AsciiDoc 문서 구조화 · LLM 성능 검증</p>
-        </div>
-      </div>
-      <hr class="divider">
-      <div class="timeline-item">
-        <span class="timeline-date">2018 – 2024</span>
-        <div class="timeline-content">
-          <h4>신한은행</h4>
-          <p>입출금 창구 업무 · 이상금융거래 감지 · 금융 상품 상담 · 6년</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Skills -->
-<section id="skills">
-  <div class="section-inner">
-    <div class="section-label">Skills</div>
-    <h2 class="section-title">보유 역량</h2>
-
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>AI / ML</h4>
-        <ul>
-          <li>LLM 성능 평가 및 검증</li>
-          <li>프롬프트 엔지니어링</li>
-          <li>Gemini / OpenAI API</li>
-          <li>Gradient Boosting</li>
-          <li>scikit-learn</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h4>개발</h4>
-        <ul>
-          <li>Python</li>
-          <li>Next.js / React</li>
-          <li>Android</li>
-          <li>REST API 연동</li>
-          <li>Figma</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h4>자격증</h4>
-        <ul>
-          <li>SQLD</li>
-          <li>ADsP</li>
-          <li>펀드투자권유자문인력</li>
-          <li>파생상품권유자문인력</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h4>도메인</h4>
-        <ul>
-          <li>금융 현업 (6년)</li>
-          <li>AI 서비스 품질 검증</li>
-          <li>문서 구조화 (AsciiDoc)</li>
-          <li>이상거래 탐지</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
