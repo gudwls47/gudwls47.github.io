@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전형진 포트폴리오</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F9F5F0;
+      --bg-card: #FFFFFF;
+      --bg-section: #F0EAE2;
+      --accent: #C4956A;
+      --accent-dark: #8B6F47;
+      --text: #2D2D2D;
+      --text-muted: #7A7069;
+      --border: #E8E0D5;
+      --tag-bg: #F0EAE2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(249, 245, 240, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo { font-weight: 700; font-size: 1.05rem; color: var(--accent-dark); }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
+    nav ul a:hover { color: var(--accent-dark); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 2rem 2rem;
+    }
+
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+
+    .hero-label {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent-dark);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* Sections */
+    section { padding: 80px 2rem; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 3rem;
+    }
+
+    /* Project Cards */
+    .projects-grid { display: grid; gap: 1.5rem; }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+      gap: 1rem;
+    }
+
+    .project-period {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      margin-top: 0.4rem;
+    }
+
+    .project-type {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .project-subtitle {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      margin-bottom: 1.4rem;
+      line-height: 1.75;
+    }
+
+    .project-achievements {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-achievements li {
+      padding: 0.35rem 0 0.35rem 1.3rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      position: relative;
+    }
+
+    .project-achievements li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .tech-tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 0.28rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Background */
+    .bg-section { background: var(--bg-section); }
+
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 1.5rem 0;
+    }
+
+    .timeline-date { font-size: 0.83rem; color: var(--text-muted); padding-top: 0.15rem; }
+
+    .timeline-content h4 { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; }
+    .timeline-content p { font-size: 0.88rem; color: var(--text-muted); }
+
+    hr.divider { border: none; border-top: 1px solid var(--border); }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-group h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .skill-group ul li { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p { color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent-dark); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .project-header { flex-direction: column; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="logo">전형진</span>
+    <ul>
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#background">경력</a></li>
+      <li><a href="#skills">스킬</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Portfolio</div>
+    <h1>금융과 AI를<br><span>연결하는</span> 개발자</h1>
+    <p>신한은행 6년 현장 경험과 AI 개발 역량을 바탕으로,<br>실제 사용자 관점에서 AI 서비스의 품질과 신뢰를 검증합니다.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">AI 품질 검증</span>
+      <span class="hero-tag">LLM 평가</span>
+      <span class="hero-tag">프롬프트 엔지니어링</span>
+      <span class="hero-tag">금융 도메인</span>
+      <span class="hero-tag">Python · Next.js</span>
+    </div>
+    <a href="#projects" class="hero-cta">프로젝트 보기 →</a>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">주요 프로젝트</h2>
+
+    <div class="projects-grid">
+
+      <!-- 신한투자증권 인턴 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-type">인턴십</span>
+            <h3>LLM 기반 AI 챗봇 PoC 검증</h3>
+            <p class="project-subtitle">신한투자증권 AI솔루션부</p>
+          </div>
+          <span class="project-period">2024</span>
+        </div>
+        <p class="project-desc">
+          금융 현업 문서를 LLM이 처리하기 최적화된 구조로 변환하고, 동일 모델에 다양한 프롬프트를 적용하여 응답 품질을 체계적으로 비교·검증했습니다. 현업 담당자 관점에서 AI 서비스의 실용성과 한계를 직접 평가했습니다.
+        </p>
+        <ul class="project-achievements">
+          <li>업무 문서를 AsciiDoc 형식으로 구조화하여 LLM 처리 정확도 개선</li>
+          <li>AsciiDoc vs PDF 형식 간 LLM 응답 품질 비교 실험 수행</li>
+          <li>동일 모델 대상 프롬프트 변경에 따른 성능 차이 분석</li>
+          <li>현업 관점에서 AI 챗봇 응답의 적합성 및 할루시네이션 검토</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">LLM</span>
+          <span class="tech-tag">AsciiDoc</span>
+          <span class="tech-tag">Prompt Engineering</span>
+          <span class="tech-tag">AI 품질 검증</span>
+          <span class="tech-tag">문서 구조화</span>
+        </div>
+      </div>
+
+      <!-- ADHD 루틴 앱 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-type">팀 프로젝트 · 팀장</span>
+            <h3>ADHD 루틴 앱</h3>
+            <p class="project-subtitle">AI 기반 맞춤 루틴 생성 모바일 애플리케이션</p>
+          </div>
+          <span class="project-period">2024</span>
+        </div>
+        <p class="project-desc">
+          ADHD 사용자의 일상 관리를 돕는 모바일 앱으로, Gemini 2.5 Flash API를 연동하여 사용자 상황에 맞는 루틴을 AI가 자동 생성합니다. 팀장으로서 기획부터 개발, 발표까지 전체 흐름을 이끌었습니다.
+        </p>
+        <ul class="project-achievements">
+          <li>Gemini 2.5 Flash API 연동으로 AI 루틴 자동 생성 기능 구현</li>
+          <li>로그인·TODO·마이페이지 화면 개발 및 백엔드 API 연결</li>
+          <li>Figma로 앱 전체 UI/UX 디자인 설계</li>
+          <li>팀장으로서 일정 관리, 발표 자료(PPT) 제작 주도</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Gemini 2.5 Flash</span>
+          <span class="tech-tag">Android</span>
+          <span class="tech-tag">Figma</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">팀장</span>
+        </div>
+      </div>
+
+      <!-- 혈당 예측 ML -->
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <span class="project-type">팀 프로젝트 · 최우수상</span>
+            <h3>혈당 수치 예측 머신러닝</h3>
+            <p class="project-subtitle">환자 데이터 기반 혈당 예측 모델 · 숭실대 IT 프로젝트 경진대회</p>
+          </div>
+          <span class="project-period">2024</span>
+        </div>
+        <p class="project-desc">
+          환자의 생활 패턴 및 의료 데이터를 분석하여 혈당 수치를 예측하는 머신러닝 모델을 개발했습니다. 숭실대 IT 프로젝트 경진대회에서 최우수상을 수상했습니다.
+        </p>
+        <ul class="project-achievements">
+          <li>Gradient Boosting 모델 적용으로 예측 정확도 최적화</li>
+          <li>환자 데이터 전처리 및 피처 엔지니어링 수행</li>
+          <li>숭실대 IT 프로젝트 경진대회 최우수상 수상</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Gradient Boosting</span>
+          <span class="tech-tag">scikit-learn</span>
+          <span class="tech-tag">데이터 분석</span>
+          <span class="tech-tag">머신러닝</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Background -->
+<section id="background" class="bg-section">
+  <div class="section-inner">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">경력 및 학력</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-date">2024 – 현재</span>
+        <div class="timeline-content">
+          <h4>숭실대학교</h4>
+          <p>IT 관련 학과 재학 · IT 프로젝트 경진대회 최우수상</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="timeline-item">
+        <span class="timeline-date">2024</span>
+        <div class="timeline-content">
+          <h4>신한투자증권 AI솔루션부 인턴</h4>
+          <p>LLM 기반 AI 챗봇 PoC · AsciiDoc 문서 구조화 · LLM 성능 검증</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="timeline-item">
+        <span class="timeline-date">2018 – 2024</span>
+        <div class="timeline-content">
+          <h4>신한은행</h4>
+          <p>입출금 창구 업무 · 이상금융거래 감지 · 금융 상품 상담 · 6년</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">보유 역량</h2>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>AI / ML</h4>
+        <ul>
+          <li>LLM 성능 평가 및 검증</li>
+          <li>프롬프트 엔지니어링</li>
+          <li>Gemini / OpenAI API</li>
+          <li>Gradient Boosting</li>
+          <li>scikit-learn</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>개발</h4>
+        <ul>
+          <li>Python</li>
+          <li>Next.js / React</li>
+          <li>Android</li>
+          <li>REST API 연동</li>
+          <li>Figma</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>자격증</h4>
+        <ul>
+          <li>SQLD</li>
+          <li>ADsP</li>
+          <li>펀드투자권유자문인력</li>
+          <li>파생상품권유자문인력</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>도메인</h4>
+        <ul>
+          <li>금융 현업 (6년)</li>
+          <li>AI 서비스 품질 검증</li>
+          <li>문서 구조화 (AsciiDoc)</li>
+          <li>이상거래 탐지</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>전형진 · <a href="mailto:gudwls10715@gmail.com">gudwls10715@gmail.com</a> · <a href="https://github.com/gudwls47" target="_blank">github.com/gudwls47</a></p>
+</footer>
+
+</body>
+</html>
