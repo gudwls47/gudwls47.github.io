@@ -195,19 +195,66 @@
       margin-bottom: 3rem;
     }
 
-    .projects-grid { display: grid; gap: 1.5rem; }
+    .slider-container { overflow: hidden; }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
     .project-card {
+      min-width: 100%;
+      flex-shrink: 0;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2.5rem;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+    }
+
+    .slider-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .slider-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    .slider-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    .slider-dots { display: flex; gap: 0.5rem; align-items: center; }
+
+    .slider-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .slider-dot.active {
+      background: var(--accent);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    .slide-counter {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      min-width: 40px;
+      text-align: center;
     }
 
     .project-header {
@@ -459,16 +506,6 @@
     }
 
     #projects { display: none; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .project-card.animate {
-      opacity: 0;
-      animation: fadeInUp 0.55s ease forwards;
-    }
   </style>
 </head>
 <body>
@@ -514,7 +551,8 @@
     <div class="section-label">Projects</div>
     <h2 class="section-title">주요 프로젝트</h2>
 
-    <div class="projects-grid">
+    <div class="slider-container">
+      <div class="slider-track" id="sliderTrack">
 
       <!-- 신한투자증권 인턴 -->
       <div class="project-card" id="proj-shinhan">
@@ -693,7 +731,19 @@
         </div>
       </div>
 
+      </div><!-- /slider-track -->
+    </div><!-- /slider-container -->
+
+    <div class="slider-nav">
+      <button class="slider-btn" id="prevBtn" onclick="slideProj(-1)" disabled>&#8592;</button>
+      <div class="slider-dots">
+        <span class="slider-dot active" onclick="goToSlide(0)"></span>
+        <span class="slider-dot" onclick="goToSlide(1)"></span>
+        <span class="slider-dot" onclick="goToSlide(2)"></span>
+      </div>
+      <button class="slider-btn" id="nextBtn" onclick="slideProj(1)">&#8594;</button>
     </div>
+
   </div>
 </section>
 
@@ -702,43 +752,62 @@
 </footer>
 
 <script>
-  function showProjects() {
-    const section = document.getElementById('projects');
-    if (section.style.display === 'block') {
-      section.scrollIntoView({ behavior: 'smooth' });
-      return;
+  var currentSlide = 0;
+  var totalSlides = 3;
+
+  function showProjects(index) {
+    var section = document.getElementById('projects');
+    if (section.style.display !== 'block') {
+      section.style.display = 'block';
     }
-    section.style.display = 'block';
-    const cards = section.querySelectorAll('.project-card');
-    cards.forEach(function(card, i) {
-      card.classList.add('animate');
-      card.style.animationDelay = (i * 0.18) + 's';
-    });
+    if (typeof index === 'number') currentSlide = index;
+    updateSlider();
     setTimeout(function() {
       section.scrollIntoView({ behavior: 'smooth' });
-    }, 80);
+    }, 60);
+  }
+
+  function slideProj(dir) {
+    currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
+    updateSlider();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlider();
+  }
+
+  function updateSlider() {
+    document.getElementById('sliderTrack').style.transform =
+      'translateX(-' + (currentSlide * 100) + '%)';
+    document.querySelectorAll('.slider-dot').forEach(function(dot, i) {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+    document.getElementById('prevBtn').disabled = currentSlide === 0;
+    document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
   }
 
   function toggleDropdown() {
-    const btn = document.getElementById('projBtn');
-    const menu = document.getElementById('projMenu');
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
+    document.getElementById('projBtn').classList.toggle('open');
+    document.getElementById('projMenu').classList.toggle('open');
   }
 
   document.addEventListener('click', function(e) {
-    const dropdown = document.querySelector('.nav-dropdown');
+    var dropdown = document.querySelector('.nav-dropdown');
     if (!dropdown.contains(e.target)) {
       document.getElementById('projBtn').classList.remove('open');
       document.getElementById('projMenu').classList.remove('open');
     }
   });
 
+  var slideMap = { 'proj-shinhan': 0, 'proj-adhd': 1, 'proj-diabetes': 2 };
   document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link) {
-    link.addEventListener('click', function() {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
       document.getElementById('projBtn').classList.remove('open');
       document.getElementById('projMenu').classList.remove('open');
-      showProjects();
+      var id = this.getAttribute('href').replace('#', '');
+      showProjects(slideMap[id] || 0);
     });
   });
 </script>
